@@ -8,3 +8,23 @@
 *{
    font-family: "Lato", sans-serif;
 }
+
+.tilt-feature {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.tilt-feature svg {
+    position: relative;
+    display: block;
+    width: calc(126% + 1.3px);
+    height: 178px;
+}
+
+.tilt-feature .shape-fill {
+    fill: #FFFFFF;
+}

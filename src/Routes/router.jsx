@@ -3,6 +3,7 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home";
 import AllRecipes from "../Pages/AllRecipes";
 import PerRecipeDetails from "../Pages/PerRecipeDetails";
+import UserSavedRecipes from "../Pages/UserSavedRecipes";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         {
           path:"/recipeDetails/:id",
           element:<PerRecipeDetails/>
+        },
+        {
+          path:"/savedRecipes",
+          element:<UserSavedRecipes/>,
+          loader:() => fetch(`https://dummyjson.com/recipes`)
         }
     ]
   },

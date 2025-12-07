@@ -8,6 +8,7 @@ import RecipeCard from "../Component/RecipeCard";
 
 const AllRecipes = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(6);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/recipes`)
@@ -51,10 +52,30 @@ const AllRecipes = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 lg:w-[80%] gap-6 mx-auto  mb-4 bg-[#EEEEEE] ">
-        {allProducts.map((item) => (
+        {allProducts.slice(0, visibleCount).map((item) => (
           <RecipeCard key={item?.id} item={item}></RecipeCard>
         ))}
       </div>
+
+      {/* show more or show less button */}
+      <div className="text-center py-6">
+        {visibleCount < allProducts.length ? (
+          <button
+            className="px-6 py-2 bg-[#3B1E54] text-white rounded-lg"
+            onClick={() => setVisibleCount(allProducts.length)}
+          >
+            Show More
+          </button>
+        ) : (
+          <button
+            className="px-6 py-2 bg-[#3B1E54] text-white rounded-lg"
+            onClick={() => setVisibleCount(6)}
+          >
+            Show Less
+          </button>
+        )}
+      </div>
+      
     </div>
   );
 };

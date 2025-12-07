@@ -10,7 +10,7 @@ import { Link } from "react-router";
 const Banner = () => {
   return (
     <div>
-      <div className="hero min-h-screen ">
+      <div className="hero min-h-screen bg-white">
         <div className="relative z-5 hero-content text-neutral-content text-center">
           <div className="max-w-xl">
             <h1 className="mb-5 text-[10vh] lg:text-[20vh] lg:text-8xl  text-[#3B1E54] font-[900] uppercase">

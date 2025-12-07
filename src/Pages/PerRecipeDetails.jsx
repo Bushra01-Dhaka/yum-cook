@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
-import { FaArrowRight, FaBookmark, FaRegBookmark, FaStar } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaBookmark,
+  FaRegBookmark,
+  FaStar,
+} from "react-icons/fa";
 import { GiCook } from "react-icons/gi";
 import { MdOutlineShare } from "react-icons/md";
 import { useParams } from "react-router";
 import RecipeCard from "../Component/RecipeCard";
+import { addToLikedDB } from "../Utilities/AddToSave";
+import { addToSaveRecipeDB } from "../Utilities/SaveRecipe";
 
 const PerRecipeDetails = () => {
   const { id } = useParams();
   console.log(id);
 
   const [eachRecipe, setEachRecipe] = useState([]);
-  const[similarRecipes, setSimilarRecipes] = useState([]);
-   const [allProducts, setAllProducts] = useState([]);
+  const [similarRecipes, setSimilarRecipes] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/recipes/${id}`)
@@ -25,21 +32,34 @@ const PerRecipeDetails = () => {
   console.log(eachRecipe);
 
   useEffect(() => {
-      fetch(`https://dummyjson.com/recipes`)
+    fetch(`https://dummyjson.com/recipes`)
       .then((res) => res.json())
       .then((data) => {
         setAllProducts(data.recipes);
-      })
-  },[])
+      });
+  }, []);
 
   useEffect(() => {
-  if (eachRecipe && allProducts.length > 0) {
-    const similar = allProducts.filter(
-      (item) => item.cuisine === eachRecipe.cuisine && item.id !== eachRecipe.id
-    );
-    setSimilarRecipes(similar);
+    if (eachRecipe && allProducts.length > 0) {
+      const similar = allProducts.filter(
+        (item) =>
+          item.cuisine === eachRecipe.cuisine && item.id !== eachRecipe.id
+      );
+      setSimilarRecipes(similar);
+    }
+  }, [eachRecipe, allProducts]);
+
+
+  const handleLikeRecipe = (id) => {
+        //  console.log("Like ", id)
+         addToLikedDB(id);
   }
-}, [eachRecipe, allProducts]);
+
+  const handleSavedRecipe = (id) => {
+    //  console.log("Saved Recipe")
+     addToSaveRecipeDB(id);
+  }
+
 
   return (
     <div>
@@ -81,13 +101,13 @@ const PerRecipeDetails = () => {
           </div>
 
           <div className="flex justfy-center gap-6 items-center cursor-pointer">
-            <p className="text-2xl">
+            <p onClick={() => handleLikeRecipe(id)} className="text-2xl">
               <AiOutlineHeart />
             </p>
-            <p className="text-2xl">
+            <p onClick={() => handleSavedRecipe(id)} className="text-2xl">
               <FaRegBookmark />
             </p>
-             <p className="text-2xl">
+            <p className="text-2xl">
               <MdOutlineShare />
             </p>
           </div>
@@ -106,10 +126,11 @@ const PerRecipeDetails = () => {
         </div>
       </div>
 
+
       <div className="px-20 py-10 bg-[#3B1E54] text-[#EEEEEE] lg:w-[70%] rounded-2xl shadow-2xl mx-auto mb-20">
         <div className="flex items-center">
           <h2 className="text-4xl font-bold text-[#EEEEEE]">Cooking Steps</h2>
-        <GiCook className=" text-5xl"/>
+          <GiCook className=" text-5xl" />
         </div>
         <div className="py-4">
           {eachRecipe?.instructions?.map((item, index) => (
@@ -124,12 +145,24 @@ const PerRecipeDetails = () => {
       </div>
 
       <div className="px-20">
-        <h2 className="text-4xl text-center font-bold text-[#3B1E54]">Similar Recipes</h2>
+        <h2 className="text-4xl text-center font-bold text-[#3B1E54]">
+          Similar Recipes
+        </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:w-[100%] gap-10 mx-auto p-10 mb-4 bg-[#EEEEEE] ">
-        {similarRecipes.map((item) => (
-          <RecipeCard key={item?.id} item={item}></RecipeCard>
-        ))}
-      </div>
+
+          {similarRecipes && similarRecipes.length > 0 ? (
+            similarRecipes.map((item) => (
+              <RecipeCard key={item?.id} item={item} />
+            ))
+          ) : (
+             <div className="flex justify-center">
+               <p className="text-center py-4 text-2xl text-slate-900">
+              No Similar Recipe Found
+            </p>
+             </div>
+          )}
+
+        </div>
       </div>
     </div>
   );

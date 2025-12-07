@@ -1,5 +1,5 @@
 import { AiOutlineHeart } from "react-icons/ai";
-import { IoCartOutline } from "react-icons/io5";
+import { IoBookmarksOutline, IoCartOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
@@ -72,9 +72,11 @@ const Navbar = () => {
          <p className="text-2xl">
           <AiOutlineHeart/>
         </p>
-        <p className="text-2xl">
-          <IoCartOutline />
+        <Link to="/savedRecipes">
+         <p className="text-2xl">
+          <IoBookmarksOutline />
         </p>
+        </Link>
        </div>
       </div>
     </div>
