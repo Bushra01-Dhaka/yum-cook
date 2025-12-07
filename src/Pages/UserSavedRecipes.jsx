@@ -38,7 +38,7 @@ const UserSavedRecipes = () => {
 
   return (
     <div className="min-h-[100vh]  ">
-      <div className="p-20">
+      <div className="px-8 py-20 lg:p-20">
         <Tabs>
           <TabList>
             <Tab>Liked Recipes</Tab>
@@ -58,7 +58,7 @@ const UserSavedRecipes = () => {
                       <div
                         key={item?.id}
                         item={item}
-                        className="py-10 flex justify-center items-center gap-6 border-2 rounded-2xl shadow-2xl border-[#3B1E54] p-4 hover:bg-[#D4BEE4]"
+                        className="py-10 flex flex-col lg:flex-row justify-center items-center gap-6 border-2 rounded-2xl shadow-2xl border-[#3B1E54] p-4 hover:bg-[#D4BEE4]"
                       >
                         {/* left */}
                         <div>
@@ -118,7 +118,7 @@ const UserSavedRecipes = () => {
                       <div
                         key={item?.id}
                         item={item}
-                        className="py-10 flex justify-center items-center gap-6 border-2 rounded-2xl shadow-2xl border-[#3B1E54] p-4 hover:bg-[#D4BEE4]"
+                        className="py-10 flex flex-col lg:flex-row justify-center items-center gap-6 border-2 rounded-2xl shadow-2xl border-[#3B1E54] p-4 hover:bg-[#D4BEE4]"
                       >
                         {/* left */}
                         <div>

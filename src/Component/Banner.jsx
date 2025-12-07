@@ -6,10 +6,71 @@ import tomato from "../assets/tomato2.jpg";
 import floatingStawberry from "../assets/floatingBerries.jpg";
 import teaLeaf from "../assets/teaLeaf1.jpg";
 import { Link } from "react-router";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Banner = () => {
+  const bannerRef = useRef(null);
+
+  useEffect(() => {
+      const t1 = gsap.timeline();
+
+      t1.to(".fishPlate", {
+        right:"8%",
+        delay:1,
+        duration:2,
+        scale:1.2
+      },'one')
+
+      t1.to(".teaLeaf", {
+        duration:2,
+        delay:1,
+        right:"6%",
+      },'one')
+
+      t1.to(".tomato",{
+        delay:1,
+        duration:2,
+        scale:1.2,
+        
+      },'one')
+
+      t1.to(".leaf1",{
+        delay:1,
+        duration:2,
+        left:"56%",
+        rotate:"120deg"
+      },'one')
+
+      t1.to(".leaf2", {
+        delay:1,
+        duration:2,
+        scale:1.2,
+        rotate:"-90deg"
+      },'one')
+
+      t1.to(".floating", {
+        scale:1.2,
+        delay:1,
+        duration:2,
+        left:"0%"
+      },'one')
+
+      t1.to(".fruits", {
+        delay:1,
+        duration:3,
+        rotate:"120deg",
+        top:"1%",
+      },'one')
+
+  }, [])
+
+
   return (
-    <div>
+    <div ref={bannerRef} className="banner">
       <div className="hero min-h-screen bg-white">
         <div className="relative z-5 hero-content text-neutral-content text-center">
           <div className="max-w-xl">
@@ -20,7 +81,7 @@ const Banner = () => {
               Cook Something Amazing Today
             </p>
             <Link to="/allRecipes">
-              <button className="btn btn-primary bg-[#3B1E54] border-0 hover:shadow-md hover:shadow-[#3B1E54]">
+              <button className="btn btn-primary bg-linear-to-r from-[#3B1E54] to-[#4f2079] hover:bg-linear-to-l order-0 hover:shadow-md hover:shadow-[#3B1E54]">
                 Explore Recipes Now
               </button>
             </Link>
@@ -28,42 +89,42 @@ const Banner = () => {
         </div>
 
         <img
-          className="z-3 w-[70%] lg:w-[30%] absolute right-0 top-[55%]"
+          className="fishPlate z-3 w-[70%] lg:w-[30%] absolute right-0 top-[55%]"
           src={fishPlate}
           alt=""
         />
         <img
-          className=" w-[20%] absolute right-0 top-[15%]"
+          className="tomato w-[20%] absolute right-[5%] top-[15%]"
           src={tomato}
           alt=""
         />
         <img
-          className="z-2 w-[10%] absolute right-[20%] top-[55%]"
+          className="teaLeaf z-2 w-[10%] absolute right-[20%] top-[55%]"
           src={teaLeaf}
           alt=""
         />
         <img
-          className="z-2 w-[10%] absolute rotate-[-90deg] right-[20%] top-[75%]"
+          className="teaLeaf z-2 w-[10%] absolute rotate-[-90deg] right-[20%] top-[75%]"
           src={teaLeaf}
           alt=""
         />
         <img
-          className="absolute z-3 w-[10%] rotate-[-180deg] top-[25%] left-[55%]"
+          className="leaf1 absolute z-3 w-[10%] rotate-[-180deg] top-[25%] left-[55%]"
           src={leaf1}
           alt=""
         />
         <img
-          className="absolute z-3 w-[10%] rotate-[-80deg] top-[35%] left-[30%]"
+          className="leaf2 absolute z-3 w-[10%] rotate-[-80deg] top-[35%] left-[30%]"
           src={leaf2}
           alt=""
         />
         <img
-          className="w-[50%] lg:w-[25%] absolute left-[-5%] top-[0%]"
+          className="fruits w-[50%] lg:w-[25%] absolute left-[-5%] top-[0%]"
           src={fruits}
           alt=""
         />
         <img
-          className="w-[40%] lg:w-[35%] absolute left-[-5%] top-[25%]"
+          className="floating w-[40%] lg:w-[30%] absolute left-[-5%] top-[40%]"
           src={floatingStawberry}
           alt=""
         />

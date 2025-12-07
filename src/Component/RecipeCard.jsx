@@ -28,9 +28,6 @@ const RecipeCard = ({ item }) => {
               <p className="text-lg">{cuisine} </p>
             </div>
           </div>
-          {/* <p className="text-3xl font-bold text-red-500 absolute top-[10%] right-[10%]">
-            <AiOutlineHeart></AiOutlineHeart>
-          </p> */}
         </div>
       </Link>
     </>

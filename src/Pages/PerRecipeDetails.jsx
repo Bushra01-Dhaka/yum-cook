@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import {
   FaArrowRight,
   FaBookmark,
@@ -12,6 +12,7 @@ import { useParams } from "react-router";
 import RecipeCard from "../Component/RecipeCard";
 import { addToLikedDB } from "../Utilities/AddToSave";
 import { addToSaveRecipeDB } from "../Utilities/SaveRecipe";
+import Swal from "sweetalert2";
 
 const PerRecipeDetails = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ const PerRecipeDetails = () => {
   const [eachRecipe, setEachRecipe] = useState([]);
   const [similarRecipes, setSimilarRecipes] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [like, setLike] = useState(false);
 
   useEffect(() => {
     fetch(`https://dummyjson.com/recipes/${id}`)
@@ -49,21 +51,26 @@ const PerRecipeDetails = () => {
     }
   }, [eachRecipe, allProducts]);
 
-
   const handleLikeRecipe = (id) => {
-        //  console.log("Like ", id)
-         addToLikedDB(id);
-  }
+    //  console.log("Like ", id)
+    addToLikedDB(id);
+    setLike(!like)
+  };
 
   const handleSavedRecipe = (id) => {
     //  console.log("Saved Recipe")
-     addToSaveRecipeDB(id);
-  }
+    addToSaveRecipeDB(id);
+     Swal.fire({
+      title: "Recipe Saved Successfully",
+      icon: "success",
+      draggable: true,
+    });
 
+  };
 
   return (
     <div>
-      <div className="flex justify-between items-start gap-6 pt-40 px-20 min-h-[70vh] bg-[#EEEEEE]">
+      <div className="flex flex-col-reverse lg:flex-row justify-between items-start gap-6 pt-40 px-6 lg:px-20 min-h-[70vh] bg-[#EEEEEE]">
         {/* left */}
         <div className="flex-1">
           <img
@@ -74,12 +81,12 @@ const PerRecipeDetails = () => {
         </div>
 
         {/* right */}
-        <div className="flex-1 p-8">
-          <h2 className="text-6xl font-bold text-[#3B1E54]">
+        <div className="flex-1 p-4 lg:p-8">
+          <h2 className="text-4xl lg:text-6xl font-bold text-[#3B1E54]">
             {eachRecipe?.name}
           </h2>
 
-          <div className="flex justify-start gap-10  items-center py-6">
+          <div className="flex justify-start lg:gap-10  items-center py-6">
             <div className="flex flex-col justify-start items-center gap-1 border-r-2 px-4">
               <h2 className="text-4xl font-bold">
                 {eachRecipe?.prepTimeMinutes}{" "}
@@ -101,9 +108,17 @@ const PerRecipeDetails = () => {
           </div>
 
           <div className="flex justfy-center gap-6 items-center cursor-pointer">
-            <p onClick={() => handleLikeRecipe(id)} className="text-2xl">
+            {
+              like ?  <p onClick={() => handleLikeRecipe(id)} className="text-2xl text-red-500">
+              <AiFillHeart />
+            </p>
+            :
+             <p onClick={() => handleLikeRecipe(id)} className="text-2xl ">
               <AiOutlineHeart />
             </p>
+
+            }
+           
             <p onClick={() => handleSavedRecipe(id)} className="text-2xl">
               <FaRegBookmark />
             </p>
@@ -126,8 +141,7 @@ const PerRecipeDetails = () => {
         </div>
       </div>
 
-
-      <div className="px-20 py-10 bg-[#3B1E54] text-[#EEEEEE] lg:w-[70%] rounded-2xl shadow-2xl mx-auto mb-20">
+      <div className="px-6 lg:px-20 py-10 bg-[#3B1E54] text-[#EEEEEE] lg:w-[70%] lg:rounded-2xl shadow-2xl lg:mx-auto mb-20">
         <div className="flex items-center">
           <h2 className="text-4xl font-bold text-[#EEEEEE]">Cooking Steps</h2>
           <GiCook className=" text-5xl" />
@@ -144,24 +158,22 @@ const PerRecipeDetails = () => {
         </div>
       </div>
 
-      <div className="px-20">
+      <div className="lg:px-20">
         <h2 className="text-4xl text-center font-bold text-[#3B1E54]">
           Similar Recipes
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-3 lg:w-[100%] gap-10 mx-auto p-10 mb-4 bg-[#EEEEEE] ">
-
           {similarRecipes && similarRecipes.length > 0 ? (
             similarRecipes.map((item) => (
               <RecipeCard key={item?.id} item={item} />
             ))
           ) : (
-             <div className="flex justify-center">
-               <p className="text-center py-4 text-2xl text-slate-900">
-              No Similar Recipe Found
-            </p>
-             </div>
+            <div className="flex justify-center">
+              <p className="text-center py-4 text-2xl text-slate-900">
+                No Similar Recipe Found
+              </p>
+            </div>
           )}
-
         </div>
       </div>
     </div>

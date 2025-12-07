@@ -1,9 +1,44 @@
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef } from "react";
+
 const Features = () => {
+  const featuresRef = useRef(null);
+
+  useEffect(() => {
+    const t2 = gsap.timeline(
+       {
+        scrollTrigger:{
+            trigger:".feature",
+            scrub:2,
+            markers:true,
+        }
+    }
+    );
+    
+    t2.to(".feature1", {
+      delay:1,
+      duration:2,
+      y:50,
+    },"two")
+    t2.to(".feature2", {
+      delay:1,
+      duration:2,
+      y:50,
+    },"two")
+    t2.to(".feature3", {
+      delay:1,
+      duration:2,
+      y:50,
+    },"two")
+
+  },[])
+
   return (
-    <div className="relative">
-      <div className="flex justify-center items-center h-[100vh] p-10 lg:p-20 bg-[#9B7EBD]">
+    <div ref={featuresRef} className="relative feature">
+      <div className="flex justify-center items-center min-h-[100vh] p-10 lg:p-20 bg-[#9B7EBD]">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
+          <div className="feature1 flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
             <h2 className="text-[8vh] text-[#3B1E54] font-[800]">1</h2>
             <p className="text-xl text-[#3B1E54]">Discover Recipes</p>
             <p className="p-4">
@@ -12,7 +47,7 @@ const Features = () => {
               occasion.
             </p>
           </div>
-          <div className="flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
+          <div className="feature2 flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
             <h2 className="text-[8vh] text-[#3B1E54] font-[800]">2</h2>
             <p className="text-xl text-[#3B1E54]">Save Recipes</p>
             <p className="p-4">
@@ -20,7 +55,7 @@ const Features = () => {
               your own personal cookbook and revisit your saved recipes anytime.
             </p>
           </div>
-          <div className="flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
+          <div className="feature3 flex flex-col bg-[#EEEEEE] justify-center items-center  shadow-2xl p-6 rounded-xl text-center text-slate-800">
             <h2 className="text-[8vh] text-[#3B1E54] font-[800]">3</h2>
             <p className="text-xl text-[#3B1E54]">Share Recipes</p>
             <p className="p-4">

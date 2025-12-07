@@ -8,7 +8,7 @@ const ExploreBanner = () => {
 
 
   return (
-    <div id="exploreBanner" className="bg-[#3B1E54] text-[#EEEEE] h-[100vh] p-20 flex justify-center items-center relative">
+    <div id="exploreBanner" className="bg-linear-to-br from-[#3B1E54] to-[#562285] text-[#EEEEE] h-[100vh] p-20 flex justify-center items-center relative">
       <div>
         <div className="text-[8vw]  lg:text-[6vw] text-xs mx-auto font-bold relative z-6 text-center">
           <h2 className="text-[#EEEEEE]">Fuel Your Day</h2>

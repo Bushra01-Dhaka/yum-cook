@@ -1,8 +1,15 @@
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoBookmarksOutline, IoCartOutline } from "react-icons/io5";
 import { Link, NavLink } from "react-router";
+import { getLikeData } from "../Utilities/AddToSave";
+import { useState } from "react";
 
 const Navbar = () => {
+
+
+  const likes = getLikeData();
+  
+
   const NavItem = (
     <div className="text-center p-4">
       <NavLink to="/">
@@ -15,7 +22,7 @@ const Navbar = () => {
           Recipes
         </li>
       </NavLink>
-      <NavLink>
+      {/* <NavLink>
         <li className="text-lg py-2 hover:border-b-2 font-semibold hover:border-b-[#3B1E54]">
           About Us
         </li>
@@ -29,7 +36,7 @@ const Navbar = () => {
         <li className="text-lg py-2 hover:border-b-2 font-semibold hover:border-b-[#3B1E54]">
           Register/Login
         </li>
-      </NavLink>
+      </NavLink> */}
     </div>
   );
   return (
@@ -68,16 +75,23 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-end">
-       <div className="gap-4 flex justify-center items-center">
-         <p className="text-2xl">
+        <div className="gap-4 flex justify-center items-center">
+          <div className="indicator">
+            <span className="indicator-item badge badge-secondary p-1 border-0 bg-[#9B7EBD]">{likes.length}</span>
+            {/* <button className="btn">inbox</button> */}
+             <p className="text-2xl">
           <AiOutlineHeart/>
         </p>
-        <Link to="/savedRecipes">
-         <p className="text-2xl">
-          <IoBookmarksOutline />
-        </p>
-        </Link>
-       </div>
+          </div>
+          {/* <p className="text-2xl">
+          <AiOutlineHeart/>
+        </p> */}
+          <Link to="/savedRecipes">
+            <p className="text-2xl">
+              <IoBookmarksOutline />
+            </p>
+          </Link>
+        </div>
       </div>
     </div>
   );
