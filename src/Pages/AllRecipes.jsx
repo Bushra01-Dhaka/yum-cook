@@ -5,8 +5,15 @@ import { GiMeal } from "react-icons/gi";
 import { RiTimerFill } from "react-icons/ri";
 import { Link } from "react-router";
 import RecipeCard from "../Component/RecipeCard";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react";
+import Aos from "aos";
+gsap.registerPlugin(ScrollTrigger);
 
 const AllRecipes = () => {
+ Aos.init();
+
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [visibleCount, setVisibleCount] = useState(6);
@@ -31,10 +38,10 @@ const AllRecipes = () => {
 
   // console.log(allProducts);
   return (
-    <div className="">
-      <div className="flex justify-center flex-col text-center pt-40 pb-20 bg-[#EEEEEE] ">
+    <div className="allRecipe">
+      <div data-aos="zoom-in" className="flex justify-center flex-col text-center pt-40 pb-20 bg-[#EEEEEE] ">
         <p className="font-semibold text-lg">Let’s Make Something Yummy!</p>
-        <h2 className="text-4xl lg:text-7xl font-semibold text-[#3B1E54]">
+        <h2 className="title text-4xl lg:text-5xl font-semibold text-[#3B1E54]">
           Discover Recipes
         </h2>
 

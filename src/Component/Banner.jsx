@@ -3,7 +3,7 @@ import leaf1 from "../assets/leaf.png";
 import fruits from "../assets/21.png";
 import leaf2 from "../assets/leafs.jpg";
 import tomato from "../assets/tomato2.jpg";
-import floatingStawberry from "../assets/floatingBerries.jpg";
+import nuts from "../assets/nuts.png";
 import teaLeaf from "../assets/teaLeaf1.jpg";
 import { Link } from "react-router";
 import gsap from "gsap";
@@ -18,11 +18,17 @@ const Banner = () => {
   useEffect(() => {
       const t1 = gsap.timeline();
 
+      t1.to(".main-title", {
+        delay:1,
+        duration:2,
+        scale:1.1
+      },'one')
+
       t1.to(".fishPlate", {
         right:"8%",
         delay:1,
         duration:2,
-        scale:1.2
+        scale:1.1
       },'one')
 
       t1.to(".teaLeaf", {
@@ -52,18 +58,18 @@ const Banner = () => {
         rotate:"-90deg"
       },'one')
 
-      t1.to(".floating", {
-        scale:1.2,
+      t1.to(".nuts", {
+        scale:1.3,
         delay:1,
         duration:2,
-        left:"0%"
+        top:"40%"
       },'one')
 
       t1.to(".fruits", {
         delay:1,
         duration:3,
-        rotate:"120deg",
-        top:"1%",
+        // rotate:"120deg",
+        top:"65%",
       },'one')
 
   }, [])
@@ -74,7 +80,7 @@ const Banner = () => {
       <div className="hero min-h-screen bg-white">
         <div className="relative z-5 hero-content text-neutral-content text-center">
           <div className="max-w-xl">
-            <h1 className="mb-5 text-[10vh] lg:text-[20vh] lg:text-8xl  text-[#3B1E54] font-[900] uppercase">
+            <h1 className="main-title mb-5 text-[10vh] lg:text-[20vh] lg:text-8xl  text-[#3B1E54] font-[900] uppercase">
               Yum Cook
             </h1>
             <p className="mb-5 text-lg text-[#18141b]">
@@ -119,13 +125,13 @@ const Banner = () => {
           alt=""
         />
         <img
-          className="fruits w-[50%] lg:w-[25%] absolute left-[-5%] top-[0%]"
+          className="fruits z-3 w-[50%] lg:w-[25%] absolute left-[-5%] top-[0%]"
           src={fruits}
           alt=""
         />
         <img
-          className="floating w-[40%] lg:w-[30%] absolute left-[-5%] top-[40%]"
-          src={floatingStawberry}
+          className="nuts z-2 w-[40%] lg:w-[20%] absolute left-[-5%] top-[50%]"
+          src={nuts}
           alt=""
         />
       </div>

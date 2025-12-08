@@ -13,10 +13,12 @@ import RecipeCard from "../Component/RecipeCard";
 import { addToLikedDB } from "../Utilities/AddToSave";
 import { addToSaveRecipeDB } from "../Utilities/SaveRecipe";
 import Swal from "sweetalert2";
+import Aos from "aos";
 
 const PerRecipeDetails = () => {
   const { id } = useParams();
   console.log(id);
+  Aos.init();
 
   const [eachRecipe, setEachRecipe] = useState([]);
   const [similarRecipes, setSimilarRecipes] = useState([]);
@@ -54,7 +56,8 @@ const PerRecipeDetails = () => {
   const handleLikeRecipe = (id) => {
     //  console.log("Like ", id)
     addToLikedDB(id);
-    setLike(!like)
+    setLike(!like);
+    
   };
 
   const handleSavedRecipe = (id) => {
@@ -72,7 +75,7 @@ const PerRecipeDetails = () => {
     <div>
       <div className="flex flex-col-reverse lg:flex-row justify-between items-start gap-6 pt-40 px-6 lg:px-20 min-h-[70vh] bg-[#EEEEEE]">
         {/* left */}
-        <div className="flex-1">
+        <div data-aos="fade-left" className="flex-1">
           <img
             className="rounded-xl shadow-2xl"
             src={eachRecipe?.image}
@@ -81,7 +84,7 @@ const PerRecipeDetails = () => {
         </div>
 
         {/* right */}
-        <div className="flex-1 p-4 lg:p-8">
+        <div data-aos="fade-right" className="flex-1 p-4 lg:p-8">
           <h2 className="text-4xl lg:text-6xl font-bold text-[#3B1E54]">
             {eachRecipe?.name}
           </h2>

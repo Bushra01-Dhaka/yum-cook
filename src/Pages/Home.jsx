@@ -1,4 +1,5 @@
 import Banner from "../Component/Banner";
+// import Comments from "../Component/Comments";
 import CookingTherapy from "../Component/CookingTherapy";
 import ExploreBanner from "../Component/ExploreBanner";
 import Features from "../Component/Features";
@@ -12,6 +13,7 @@ const Home = () => {
       <CookingTherapy />
       <AllRecipes />
       <ExploreBanner />
+      {/* <Comments/> */}
     </div>
   );
 };
