@@ -18,7 +18,7 @@ const ExploreBanner = () => {
       scrub: 1,
       start: "top center",
       end: "+=1000",    // adds 1000px scroll distance
-      markers: true,
+      // markers: true,
     }
   });
 
